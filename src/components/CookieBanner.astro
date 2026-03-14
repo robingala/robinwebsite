@@ -1,0 +1,251 @@
+---
+// ============================================
+// ROBIN GARTENBAU - DSGVO COOKIE BANNER
+// ============================================
+// Vanilla JS Cookie Banner - blockiert Skripte bis Zustimmung
+// Speichert keine personenbezogenen Daten im localStorage
+// ============================================
+---
+
+<!-- Cookie Banner Container (initial versteckt) -->
+<div 
+  id="cookie-banner" 
+  class="fixed bottom-0 left-0 right-0 z-[100] bg-white shadow-2xl border-t border-secondary-200 transform translate-y-full transition-transform duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cookie-title"
+  aria-describedby="cookie-description"
+  hidden
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+      
+      <!-- Text Content -->
+      <div class="flex-1 pr-0 lg:pr-8">
+        <h3 id="cookie-title" class="text-lg font-semibold text-secondary-900 mb-2">
+          Datenschutzeinstellungen
+        </h3>
+        <p id="cookie-description" class="text-sm text-secondary-600 leading-relaxed">
+          Wir verwenden Cookies ausschließlich für technisch notwendige Funktionen dieser Website. 
+          Es werden keine Tracking-Cookies oder Analyse-Tools eingesetzt. 
+          <a href="/datenschutz" class="text-primary hover:text-primary-600 underline underline-offset-2">
+            Mehr erfahren
+          </a>
+        </p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full lg:w-auto">
+        <!-- Alle ablehnen (nur essentiell) -->
+        <button 
+          type="button"
+          id="cookie-reject"
+          class="px-4 py-2.5 text-sm font-medium text-secondary-600 bg-secondary-50 hover:bg-secondary-100 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-300"
+        >
+          Nur essenziell
+        </button>
+        
+        <!-- Akzeptieren -->
+        <button 
+          type="button"
+          id="cookie-accept"
+          class="px-6 py-2.5 text-sm font-semibold text-white bg-primary hover:bg-primary-600 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
+        >
+          Zustimmen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Wiederrufs-Button (erscheint nach Zustimmung) -->
+<button 
+  type="button"
+  id="cookie-revoke"
+  class="fixed bottom-4 left-4 z-50 p-2 bg-white rounded-full shadow-lg border border-secondary-200 text-secondary-400 hover:text-secondary-600 transition-all duration-200 opacity-0 pointer-events-none"
+  aria-label="Cookie-Einstellungen ändern"
+  title="Cookie-Einstellungen ändern"
+>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+</button>
+
+<script is:inline>
+  /**
+   * DSGVO-konformes Cookie-Management
+   * Speichert KEINE personenbezogenen Daten
+   * Verwendet nur essentielle Cookies
+   */
+  (function() {
+    'use strict';
+    
+    const COOKIE_NAME = 'rg_cookie_consent';
+    const COOKIE_EXPIRE_DAYS = 365;
+    
+    // DOM Elemente
+    const banner = document.getElementById('cookie-banner');
+    const btnAccept = document.getElementById('cookie-accept');
+    const btnReject = document.getElementById('cookie-reject');
+    const btnRevoke = document.getElementById('cookie-revoke');
+    
+    /**
+     * Cookie lesen
+     */
+    function getCookie(name) {
+      const value = '; ' + document.cookie;
+      const parts = value.split('; ' + name + '=');
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    }
+    
+    /**
+     * Cookie setzen
+     */
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/; SameSite=Lax';
+    }
+    
+    /**
+     * Cookie löschen
+     */
+    function deleteCookie(name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
+    
+    /**
+     * Zustimmungs-Status prüfen
+     */
+    function getConsentStatus() {
+      const consent = getCookie(COOKIE_NAME);
+      if (consent === 'all') return 'all';
+      if (consent === 'essential') return 'essential';
+      return null;
+    }
+    
+    /**
+     * Banner anzeigen
+     */
+    function showBanner() {
+      if (banner) {
+        banner.hidden = false;
+        // Kleiner Delay für Animation
+        setTimeout(() => {
+          banner.classList.remove('translate-y-full');
+        }, 100);
+      }
+    }
+    
+    /**
+     * Banner ausblenden
+     */
+    function hideBanner() {
+      if (banner) {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => {
+          banner.hidden = true;
+        }, 300);
+      }
+    }
+    
+    /**
+     * Widerrufs-Button anzeigen
+     */
+    function showRevokeButton() {
+      if (btnRevoke) {
+        btnRevoke.classList.remove('opacity-0', 'pointer-events-none');
+        btnRevoke.classList.add('opacity-100');
+      }
+    }
+    
+    /**
+     * Widerrufs-Button verstecken
+     */
+    function hideRevokeButton() {
+      if (btnRevoke) {
+        btnRevoke.classList.add('opacity-0', 'pointer-events-none');
+        btnRevoke.classList.remove('opacity-100');
+      }
+    }
+    
+    /**
+     * Alle Cookies akzeptieren
+     */
+    function acceptAll() {
+      setCookie(COOKIE_NAME, 'all', COOKIE_EXPIRE_DAYS);
+      hideBanner();
+      showRevokeButton();
+      
+      // Custom Event auslösen für externe Skripte
+      window.dispatchEvent(new CustomEvent('cookieConsent', { 
+        detail: { consent: 'all' } 
+      }));
+    }
+    
+    /**
+     * Nur essenzielle Cookies (ablehnen)
+     */
+    function acceptEssential() {
+      setCookie(COOKIE_NAME, 'essential', COOKIE_EXPIRE_DAYS);
+      hideBanner();
+      showRevokeButton();
+      
+      // Custom Event auslösen
+      window.dispatchEvent(new CustomEvent('cookieConsent', { 
+        detail: { consent: 'essential' } 
+      }));
+    }
+    
+    /**
+     * Zustimmung widerrufen
+     */
+    function revokeConsent() {
+      deleteCookie(COOKIE_NAME);
+      hideRevokeButton();
+      showBanner();
+      
+      // Seite neu laden um Skripte zu blockieren
+      window.location.reload();
+    }
+    
+    /**
+     * Initialisierung
+     */
+    function init() {
+      const status = getConsentStatus();
+      
+      if (!status) {
+        // Noch keine Entscheidung - Banner zeigen
+        showBanner();
+      } else {
+        // Bereits entschieden - Widerrufs-Button zeigen
+        showRevokeButton();
+        
+        // Event auslösen für initiale Skripte
+        window.dispatchEvent(new CustomEvent('cookieConsent', { 
+          detail: { consent: status } 
+        }));
+      }
+      
+      // Event Listener
+      btnAccept?.addEventListener('click', acceptAll);
+      btnReject?.addEventListener('click', acceptEssential);
+      btnRevoke?.addEventListener('click', revokeConsent);
+    }
+    
+    // Sofort ausführen
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    
+    // Global verfügbar machen für externe Prüfung
+    window.CookieConsent = {
+      getStatus: getConsentStatus,
+      hasConsent: function() { return getConsentStatus() !== null; }
+    };
+  })();
+</script>

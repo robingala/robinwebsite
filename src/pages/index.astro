@@ -1,0 +1,650 @@
+---
+// ============================================
+// ROBIN GARTENBAU - STARTSEITE (ONE-PAGER)
+// ============================================
+// Hochkonvertierende Landing Page mit allen Sektionen
+// ============================================
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import { Image } from 'astro:assets';
+
+// SEO Meta-Daten
+const pageTitle = 'Robin Garten- und Landschaftsbau | Ihr Traumgarten in Stadthagen';
+const pageDescription = 'Professioneller Garten- und Landschaftsbau in Stadthagen. ✓ Gartenpflege ✓ Rollrasen ✓ Zaunbau ✓ Terrassenbau ✓ Mähroboter. Jetzt unverbindlich anfragen!';
+
+// Kontaktdaten
+const contact = {
+  phone: '+491785361122',
+  phoneDisplay: '0178 5361122',
+  email: 'info@robingartenbau.de',
+  whatsapp: 'https://wa.me/491785361122',
+  address: 'Lauenhäger Straße 53a, 31655 Stadthagen',
+};
+
+// Leistungen / Services
+const services = [
+  {
+    title: 'Galabau',
+    description: 'Professionelle Gartengestaltung von der Planung bis zur Umsetzung. Wir schaffen Ihren Wohlfühlgarten.',
+    icon: 'tree',
+  },
+  {
+    title: 'Gartenpflege',
+    description: 'Regelmäßige Pflege für einen gesunden und gepflegten Garten das ganze Jahr über.',
+    icon: 'seedling',
+  },
+  {
+    title: 'Rollrasen',
+    description: 'Sofort grüner Rasen durch professionelle Verlegung hochwertiger Rollrasen.',
+    icon: 'layer-group',
+  },
+  {
+    title: 'Mähroboter',
+    description: 'Installation und Wartung von Mährobotern für einen perfekten Rasen ohne Aufwand.',
+    icon: 'robot',
+  },
+  {
+    title: 'Rasenbewässerung',
+    description: 'Effiziente Bewässerungssysteme für gesunden Rasen und Wassereinsparung.',
+    icon: 'faucet',
+  },
+  {
+    title: 'Zaunbau',
+    description: 'Individuelle Zäune aus Holz, Metall oder Kunststoff – passend zu Ihrem Garten.',
+    icon: 'grip-lines-vertical',
+  },
+  {
+    title: 'Pflasterung',
+    description: 'Hochwertige Pflasterarbeiten für Einfahrten, Wege und Terrassen.',
+    icon: 'cubes',
+  },
+  {
+    title: 'Terrassenbau',
+    description: 'Gemütliche Terrassen aus Holz, Stein oder WPC für entspannte Stunden im Freien.',
+    icon: 'umbrella-beach',
+  },
+  {
+    title: 'Objektpflege',
+    description: 'Professionelle Grünflächenpflege für Gewerbeobjekte und Wohnanlagen.',
+    icon: 'building',
+  },
+  {
+    title: 'Winterdienst',
+    description: 'Zuverlässige Räum- und Streudienste für sichere Wege im Winter.',
+    icon: 'snowflake',
+  },
+  {
+    title: 'Entrümpelung',
+    description: 'Fachgerechte Entsorgung und Entrümpelung von Gärten und Grundstücken.',
+    icon: 'house-crack',
+  },
+];
+
+// Galerie Projekte mit Bildern
+const galleryProjects = [
+  { title: 'Gartengestaltung Stadthagen', category: 'Galabau', image: '/images/ref1.jpeg' },
+  { title: 'Rollrasen Verlegung', category: 'Rasen', image: '/images/ref2.jpeg' },
+  { title: 'Holzterrasse mit Überdachung', category: 'Terrasse', image: '/images/ref3.jpeg' },
+  { title: 'Sichtschutzzaun Modern', category: 'Zaunbau', image: '/images/ref4.jpeg' },
+  { title: 'Pflasterung Einfahrt', category: 'Pflasterung', image: '/images/ref5.jpeg' },
+  { title: 'Bewässerungsanlage', category: 'Bewässerung', image: '/images/ref6.jpeg' },
+];
+---
+
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+  canonicalURL={Astro.url}
+>
+  <!-- Header Slot -->
+  <Header slot="header" />
+  
+  <!-- Cookie Banner Slot -->
+  <CookieBanner slot="cookie-banner" />
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section 
+    class="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden"
+    aria-labelledby="hero-title"
+  >
+    <!-- Hintergrundbild mit Overlay -->
+    <div class="absolute inset-0 z-0">
+      <Image 
+        src="/images/hero.png" 
+        alt="Wunderschöner gepflegter Garten mit professioneller Landschaftsgestaltung" 
+        width={1920} 
+        height={800}
+        class="w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+      </div>
+      <!-- Overlay für bessere Lesbarkeit -->
+      <div class="absolute inset-0 bg-secondary-900/40" aria-hidden="true"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="animate-slide-up">
+        <h1 
+          id="hero-title"
+          class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg"
+        >
+          Ihr Traumgarten in<br />
+          <span class="text-primary-300">Stadthagen</span> & Umgebung
+        </h1>
+        
+        <p class="text-xl sm:text-2xl text-white/90 max-w-2xl mx-auto mb-8 drop-shadow-md">
+          Professioneller Garten- und Landschaftsbau. 
+          Inhabergeführt, zuverlässig und mit Leidenschaft für grüne Oasen.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <!-- WhatsApp Button -->
+          <a 
+            href={contact.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group inline-flex items-center gap-3 px-8 py-4 bg-green-500 text-white font-bold text-lg rounded-xl shadow-xl hover:bg-green-600 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-400/50"
+            aria-label="Jetzt per WhatsApp Kontakt aufnehmen"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span>WhatsApp schreiben</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 20px; color: #ffffff;"></i>
+          </a>
+
+          <!-- Angebot Button -->
+          <a 
+            href="#kontakt"
+            class="group inline-flex items-center gap-3 px-8 py-4 bg-white text-secondary-800 font-bold text-lg rounded-xl shadow-xl hover:bg-secondary-50 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-white/50"
+            aria-label="Zum Kontaktformular für ein unverbindliches Angebot"
+          >
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+            <span>Angebot anfordern</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-white/80">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check" style="font-size: 20px; color: #a3d977;"></i>
+            <span class="text-sm font-medium">Inhabergeführt</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check" style="font-size: 20px; color: #a3d977;"></i>
+            <span class="text-sm font-medium">Zuverlässig & Termintreu</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check" style="font-size: 20px; color: #a3d977;"></i>
+            <span class="text-sm font-medium">Faire Preise</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block" aria-hidden="true">
+      <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       LEISTUNGEN SECTION
+       ========================================== -->
+  <section 
+    id="leistungen" 
+    class="py-20 lg:py-28 bg-secondary-50"
+    aria-labelledby="services-title"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold text-sm rounded-full mb-4">
+          Unser Leistungsspektrum
+        </span>
+        <h2 
+          id="services-title"
+          class="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-900 mb-4"
+        >
+          Alles für Ihren Garten
+        </h2>
+        <p class="text-lg text-secondary-600">
+          Von der Planung bis zur Umsetzung – wir begleiten Sie bei jedem Schritt zu Ihrem Traumgarten.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        {services.map((service, index) => (
+          <article 
+            class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-secondary-100"
+            style={`animation-delay: ${index * 50}ms`}
+          >
+            <!-- Icon -->
+            <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+              <i class={`fa-solid fa-${service.icon} service-icon`} style="font-size: 28px; color: #6fa822;"></i>
+            </div>
+
+            <!-- Content -->
+            <h3 class="text-xl font-bold text-secondary-900 mb-2 group-hover:text-primary transition-colors duration-200">
+              {service.title}
+            </h3>
+            <p class="text-secondary-600 text-sm leading-relaxed">
+              {service.description}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       ÜBER UNS / VERTRAUEN SECTION
+       ========================================== -->
+  <section 
+    id="ueber-uns" 
+    class="py-20 lg:py-28 bg-white"
+    aria-labelledby="about-title"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        
+        <!-- Text Content -->
+        <div>
+          <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold text-sm rounded-full mb-4">
+            Über uns
+          </span>
+          <h2 
+            id="about-title"
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-900 mb-6"
+          >
+            Ihr verlässlicher Partner für grüne Projekte
+          </h2>
+          <div class="space-y-4 text-secondary-600 text-lg leading-relaxed">
+            <p>
+              Robin Garten- und Landschaftsbau steht für handwerkliche Qualität und persönliche Beratung. 
+              Als inhabergeführtes Unternehmen in Stadthagen legen wir Wert auf direkte Kommunikation 
+              und termingerechte Umsetzung.
+            </p>
+            <p>
+              Ob kleine Gartenpflege oder große Landschaftsgestaltung – wir bringen Leidenschaft 
+              und Fachwissen in jedes Projekt. Ihre Zufriedenheit ist unser Maßstab.
+            </p>
+          </div>
+
+          <!-- USPs -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-user-tie" style="font-size: 20px; color: #6fa822;"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900">Persönliche Beratung</h4>
+                <p class="text-sm text-secondary-600">Direkter Kontakt zum Inhaber</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-shield-halved" style="font-size: 20px; color: #6fa822;"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900">Qualitätsgarantie</h4>
+                <p class="text-sm text-secondary-600">Handwerk mit Gewährleistung</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-clock" style="font-size: 20px; color: #6fa822;"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900">Termintreue</h4>
+                <p class="text-sm text-secondary-600">Zuverlässige Einhaltung</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-euro-sign" style="font-size: 20px; color: #6fa822;"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900">Faire Preise</h4>
+                <p class="text-sm text-secondary-600">Transparente Kostenaufstellung</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bild / Visual -->
+        <div class="relative">
+          <Image 
+            src="/images/uberuns.png" 
+            alt="Das Team von Robin Galabau bei der professionellen Gartenarbeit" 
+            width={600} 
+            height={450}
+            class="w-full rounded-2xl shadow-2xl"
+            loading="lazy"
+            decoding="async"
+          />
+          
+          <!-- Floating Badge -->
+          <div class="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-2xl shadow-xl">
+            <p class="text-4xl font-bold">10+</p>
+            <p class="text-sm text-primary-100">Jahre Erfahrung</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       GALERIE SECTION (PLATZHALTER)
+       ========================================== -->
+  <section 
+    id="galerie" 
+    class="py-20 lg:py-28 bg-secondary-50"
+    aria-labelledby="gallery-title"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold text-sm rounded-full mb-4">
+          Referenzen
+        </span>
+        <h2 
+          id="gallery-title"
+          class="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-900 mb-4"
+        >
+          Unsere Projekte
+        </h2>
+        <p class="text-lg text-secondary-600">
+          Ein Auszug unserer erfolgreich umgesetzten Gartenprojekte in Stadthagen und Umgebung.
+        </p>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {galleryProjects.map((project, index) => (
+          <figure class="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
+            <Image 
+              src={project.image}
+              alt={project.title}
+              width={400}
+              height={300}
+              class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              decoding="async"
+            />
+            
+            <!-- Overlay -->
+            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-secondary-900/90 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p class="text-white font-semibold">{project.title}</p>
+              <p class="text-white/80 text-sm">{project.category}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-12">
+        <p class="text-secondary-600 mb-4">
+          Lassen Sie sich von unseren Arbeiten inspirieren.
+        </p>
+        <a 
+          href="#kontakt"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary-600 hover:shadow-lg transition-all duration-200"
+        >
+          Jetzt Projekt besprechen
+          <i class="fa-solid fa-arrow-right" style="font-size: 20px; color: #ffffff;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       KONTAKT SECTION
+       ========================================== -->
+  <section 
+    id="kontakt" 
+    class="py-20 lg:py-28 bg-white"
+    aria-labelledby="contact-title"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold text-sm rounded-full mb-4">
+          Kontakt
+        </span>
+        <h2 
+          id="contact-title"
+          class="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-900 mb-4"
+        >
+          Lassen Sie uns reden
+        </h2>
+        <p class="text-lg text-secondary-600">
+          Haben Sie ein Projekt im Kopf? Kontaktieren Sie uns für ein unverbindliches Angebot.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        
+        <!-- Linke Spalte: Kontaktdaten -->
+        <div class="space-y-8">
+          <!-- Schnellkontakt -->
+          <div class="bg-secondary-50 rounded-2xl p-8">
+            <h3 class="text-xl font-bold text-secondary-900 mb-6">Schnellkontakt</h3>
+            
+            <div class="space-y-4">
+              <!-- Telefon -->
+              <a 
+                href={`tel:${contact.phone}`}
+                class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 group"
+              >
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                  <i class="fa-solid fa-phone" style="font-size: 24px; color: #6fa822;"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-secondary-500">Telefon</p>
+                  <p class="text-lg font-semibold text-secondary-900">{contact.phoneDisplay}</p>
+                </div>
+              </a>
+
+              <!-- WhatsApp -->
+              <a 
+                href={contact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 p-4 bg-green-50 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 group"
+              >
+                <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center group-hover:bg-green-600 transition-colors duration-200">
+                  <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-green-700">WhatsApp</p>
+                  <p class="text-lg font-semibold text-green-800">Direkt schreiben</p>
+                </div>
+              </a>
+
+              <!-- E-Mail -->
+              <a 
+                href={`mailto:${contact.email}`}
+                class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 group"
+              >
+                <div class="w-12 h-12 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-200">
+                  <i class="fa-solid fa-envelope" style="font-size: 24px; color: #6b7280;"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-secondary-500">E-Mail</p>
+                  <p class="text-lg font-semibold text-secondary-900">{contact.email}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Adresse -->
+          <div>
+            <h3 class="text-xl font-bold text-secondary-900 mb-4">Adresse</h3>
+            <address class="not-italic text-secondary-600 leading-relaxed">
+              <strong class="text-secondary-900 block mb-1">Robin Garten- und Landschaftsbau</strong>
+              {contact.address}
+            </address>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Kontaktformular -->
+        <div class="bg-secondary-50 rounded-2xl p-8">
+          <h3 class="text-xl font-bold text-secondary-900 mb-2">Anfrage senden</h3>
+          <p class="text-secondary-600 mb-6">
+            Füllen Sie das Formular aus – wir melden uns schnellstmöglich bei Ihnen.
+          </p>
+
+          <!-- Web3Forms Integration -->
+          <form 
+            action="https://api.web3forms.com/submit" 
+            method="POST"
+            class="space-y-5"
+            aria-label="Kontaktformular"
+          >
+            <!-- Web3Forms Access Key (ersetzen!) -->
+            <input type="hidden" name="access_key" value="6706f568-3473-453e-9fff-e17d689a4fbc" />
+            
+            <!-- Honeypot Spamschutz -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+            
+            <!-- Redirect nach Absenden -->
+            <input type="hidden" name="redirect" value="https://robingartenbau.de/danke" />
+            
+            <!-- Von welcher Seite -->
+            <input type="hidden" name="subject" value="Neue Kontaktanfrage von robingartenbau.de" />
+
+            <!-- Name -->
+            <div>
+              <label for="name" class="block text-sm font-medium text-secondary-700 mb-1">
+                Name <span class="text-red-500" aria-label="Pflichtfeld">*</span>
+              </label>
+              <input 
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-secondary-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 bg-white"
+                placeholder="Max Mustermann"
+                aria-required="true"
+              />
+            </div>
+
+            <!-- E-Mail -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-secondary-700 mb-1">
+                E-Mail <span class="text-red-500" aria-label="Pflichtfeld">*</span>
+              </label>
+              <input 
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-secondary-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 bg-white"
+                placeholder="max@beispiel.de"
+                aria-required="true"
+              />
+            </div>
+
+            <!-- Telefon -->
+            <div>
+              <label for="phone" class="block text-sm font-medium text-secondary-700 mb-1">
+                Telefon (optional)
+              </label>
+              <input 
+                type="tel"
+                id="phone"
+                name="phone"
+                class="w-full px-4 py-3 rounded-lg border border-secondary-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 bg-white"
+                placeholder="0171 12345678"
+              />
+            </div>
+
+            <!-- Dienstleistung -->
+            <div>
+              <label for="service" class="block text-sm font-medium text-secondary-700 mb-1">
+                Gewünschte Dienstleistung
+              </label>
+              <select 
+                id="service"
+                name="service"
+                class="w-full px-4 py-3 rounded-lg border border-secondary-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 bg-white"
+              >
+                <option value="">Bitte auswählen...</option>
+                <option value="gartenplanung">Gartenplanung / Galabau</option>
+                <option value="gartenpflege">Gartenpflege</option>
+                <option value="rollrasen">Rollrasen</option>
+                <option value="maehroboter">Mähroboter Installation</option>
+                <option value="bewaesserung">Rasenbewässerung</option>
+                <option value="zaunbau">Zaunbau</option>
+                <option value="pflasterung">Pflasterung</option>
+                <option value="terrasse">Terrassenbau</option>
+                <option value="objektpflege">Objektpflege</option>
+                <option value="winterdienst">Winterdienst</option>
+                <option value="entruemplung">Entrümpelung</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </div>
+
+            <!-- Nachricht -->
+            <div>
+              <label for="message" class="block text-sm font-medium text-secondary-700 mb-1">
+                Nachricht <span class="text-red-500" aria-label="Pflichtfeld">*</span>
+              </label>
+              <textarea 
+                id="message"
+                name="message"
+                required
+                rows="4"
+                class="w-full px-4 py-3 rounded-lg border border-secondary-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 bg-white resize-vertical"
+                placeholder="Beschreiben Sie Ihr Projekt..."
+                aria-required="true"
+              ></textarea>
+            </div>
+
+            <!-- Datenschutz Checkbox -->
+            <div class="flex items-start gap-3">
+              <input 
+                type="checkbox"
+                id="privacy"
+                name="privacy"
+                required
+                class="w-5 h-5 mt-0.5 text-primary border-secondary-300 rounded focus:ring-primary cursor-pointer"
+                aria-required="true"
+              />
+              <label for="privacy" class="text-sm text-secondary-600">
+                Ich habe die <a href="/datenschutz" class="text-primary hover:underline" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. <span class="text-red-500" aria-label="Pflichtfeld">*</span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+              type="submit"
+              class="w-full px-6 py-4 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:bg-primary-600 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary/30"
+            >
+              Anfrage senden
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Slot -->
+  <Footer slot="footer" />
+</Layout>

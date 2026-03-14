@@ -1,0 +1,368 @@
+---
+// ============================================
+// ROBIN GARTENBAU - DATENSCHUTZERKLÄRUNG
+// ============================================
+// DSGVO-konforme Datenschutzerklärung
+// Fokus: Hosting, lokale Fonts, Web3Forms, Cookies
+// ============================================
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+
+const pageTitle = 'Datenschutzerklärung | Robin Garten- und Landschaftsbau';
+const pageDescription = 'Datenschutzerklärung von Robin Garten- und Landschaftsbau. Informationen zur Datenverarbeitung, Cookies und Ihren Rechten nach DSGVO.';
+---
+
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+  canonicalURL={new URL('/datenschutz', Astro.site)}
+>
+  <Header slot="header" />
+  <CookieBanner slot="cookie-banner" />
+
+  <article class="py-16 lg:py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center gap-2 text-sm text-secondary-500">
+          <li>
+            <a href="/" class="hover:text-primary transition-colors">Startseite</a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li class="text-secondary-900 font-medium" aria-current="page">Datenschutz</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <h1 class="text-4xl sm:text-5xl font-bold text-secondary-900 mb-4">
+          Datenschutzerklärung
+        </h1>
+        <p class="text-secondary-600">
+          Informationen zum Datenschutz und Ihre Rechte
+        </p>
+        <p class="text-sm text-secondary-500 mt-2">
+          Stand: März 2026
+        </p>
+      </header>
+
+      <div class="prose prose-lg max-w-none prose-headings:text-secondary-900 prose-p:text-secondary-600 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-secondary-900">
+        
+        <!-- Einleitung -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">1. Einleitung und Überblick</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer persönlichen Daten 
+            ist uns ein wichtiges Anliegen. Nachfolgend informieren wir Sie umfassend über den Umgang 
+            mit Ihren Daten.
+          </p>
+          
+          <p class="text-secondary-600">
+            Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und Zweck der 
+            Verarbeitung personenbezogener Daten im Rahmen der Nutzung unserer Website und unserer 
+            Dienstleistungen.
+          </p>
+        </section>
+
+        <!-- Verantwortlicher -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">2. Verantwortlicher</h2>
+          
+          <div class="bg-secondary-50 rounded-xl p-6 not-prose">
+            <p class="font-semibold text-secondary-900 text-lg mb-2">
+              Robin Garten- und Landschaftsbau
+            </p>
+            <p class="text-secondary-700 mb-4">
+              Inhaber: Kayhan Özer<br />
+              Lauenhäger Straße 53a<br />
+              31655 Stadthagen<br />
+              Deutschland
+            </p>
+            
+            <div class="space-y-1 text-secondary-700">
+              <p>
+                <strong>Telefon:</strong>{' '}
+                <a href="tel:+491785361122" class="text-primary hover:underline">+49 178 5361122</a>
+              </p>
+              <p>
+                <strong>E-Mail:</strong>{' '}
+                <a href="mailto:info@robingartenbau.de" class="text-primary hover:underline">info@robingartenbau.de</a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Hosting -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">3. Hosting</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Unsere Website wird bei folgendem Dienstleister gehostet:
+          </p>
+          
+          <div class="bg-secondary-50 rounded-xl p-6 mb-6 not-prose">
+            <p class="font-semibold text-secondary-900 mb-2">Netlify, Inc.</p>
+            <p class="text-secondary-700">
+              2325 3rd Street, Suite 215<br />
+              San Francisco, CA 94107<br />
+              USA
+            </p>
+          </div>
+          
+          <p class="text-secondary-600 mb-4">
+            Netlify ist unter dem EU-US Data Privacy Framework zertifiziert und bietet ein 
+            angemessenes Datenschutzniveau gemäß Art. 45 DSGVO. 
+          </p>
+          
+          <p class="text-secondary-600">
+            Der Hoster speichert standardmäßig folgende Daten in sogenannten Server-Log-Dateien:
+          </p>
+          
+          <ul class="list-disc pl-6 space-y-1 text-secondary-600 mt-2">
+            <li>IP-Adresse (anonymisiert)</li>
+            <li>Datum und Uhrzeit der Anfrage</li>
+            <li>Zeitzonendifferenz zur Greenwich Mean Time (GMT)</li>
+            <li>Inhalt der Anforderung (konkrete Seite)</li>
+            <li>Zugriffsstatus/HTTP-Statuscode</li>
+            <li>jeweils übertragene Datenmenge</li>
+            <li>Website, von der die Anforderung kommt</li>
+            <li>Browser und Browserversion</li>
+            <li>Betriebssystem und dessen Oberfläche</li>
+          </ul>
+        </section>
+
+        <!-- Kontaktformular -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">4. Kontaktformular</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Wenn Sie uns über das Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben 
+            aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks 
+            Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+          </p>
+          
+          <p class="text-secondary-600 mb-4">
+            Unser Kontaktformular wird über folgenden Dienstleister bereitgestellt:
+          </p>
+          
+          <div class="bg-secondary-50 rounded-xl p-6 mb-6 not-prose">
+            <p class="font-semibold text-secondary-900 mb-2">Web3Forms</p>
+            <p class="text-secondary-700">
+              <a href="https://web3forms.com/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">
+                https://web3forms.com/
+              </a>
+            </p>
+            <p class="text-secondary-600 text-sm mt-2">
+              Web3Forms verarbeitet die Formulardaten ausschließlich zur Weiterleitung an uns. 
+              Die Daten werden nicht zu anderen Zwecken verwendet.
+            </p>
+          </div>
+          
+          <p class="text-secondary-600">
+            Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, 
+            sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur 
+            Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen 
+            beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven 
+            Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf 
+            Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), sofern diese abgefragt wurde.
+          </p>
+        </section>
+
+        <!-- Cookies -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">5. Cookies</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Unsere Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem 
+            Endgerät gespeichert werden.
+          </p>
+          
+          <h3 class="text-xl font-semibold text-secondary-900 mb-3">5.1 Technisch notwendige Cookies</h3>
+          <p class="text-secondary-600 mb-4">
+            Wir verwenden ausschließlich technisch notwendige Cookies, die für den Betrieb der 
+            Website erforderlich sind. Diese Cookies speichern:
+          </p>
+          
+          <ul class="list-disc pl-6 space-y-1 text-secondary-600 mb-4">
+            <li>Ihre Cookie-Einwilligungspräferenzen</li>
+          </ul>
+          
+          <p class="text-secondary-600 mb-6">
+            Diese Cookies werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert. 
+            Wir haben ein berechtigtes Interesse an der Speicherung von Cookies zur technisch 
+            fehlerfreien und optimierten Bereitstellung unserer Dienste.
+          </p>
+          
+          <h3 class="text-xl font-semibold text-secondary-900 mb-3">5.2 Keine Tracking- oder Analyse-Cookies</h3>
+          <p class="text-secondary-600 mb-4">
+            <strong class="text-secondary-900">Wichtig:</strong> Wir verwenden keine 
+            Tracking-Cookies, Analyse-Tools (wie Google Analytics) oder Marketing-Cookies. 
+            Es findet kein Tracking Ihres Nutzerverhaltens statt.
+          </p>
+          
+          <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4">
+            <p class="text-green-800 text-sm">
+              <strong>DSGVO-Konformität:</strong> Alle verwendeten Cookies sind rein technischer 
+              Natur und werden lokal auf Ihrem Gerät gespeichert. Keine Daten werden an Dritte 
+              zu Analyse- oder Marketingzwecken übermittelt.
+            </p>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-secondary-900 mb-3">5.3 Cookie-Verwaltung</h3>
+          <p class="text-secondary-600">
+            Sie können Ihre Cookie-Einstellungen jederzeit ändern oder widerrufen, indem Sie 
+            auf den "Cookie-Einstellungen"-Button im Footer klicken.
+          </p>
+        </section>
+
+        <!-- Schriftarten -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">6. Lokale Schriftarten (DSGVO-konform)</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Zur Darstellung unserer Website verwenden wir die Schriftart "Inter". Diese Schriftart 
+            wird <strong class="text-secondary-900">lokal</strong> von unserem Server geladen und 
+            nicht von externen Diensten wie Google Fonts.
+          </p>
+          
+          <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+            <p class="text-green-800 text-sm">
+              <strong>Datenschutzvorteil:</strong> Durch das lokale Hosten der Schriftarten werden 
+              keine Verbindungen zu externen Servern (wie Google) hergestellt. Ihre IP-Adresse wird 
+              nicht an Dritte übermittelt – ein wichtiger Aspekt der DSGVO-Konformität.
+            </p>
+          </div>
+        </section>
+
+        <!-- Ihre Rechte -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">7. Ihre Rechte</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Sie haben bezüglich Ihrer personenbezogenen Daten folgende Rechte:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-6">
+            <div class="bg-secondary-50 rounded-xl p-4">
+              <h4 class="font-semibold text-secondary-900 mb-2">Auskunftsrecht (Art. 15 DSGVO)</h4>
+              <p class="text-sm text-secondary-600">Sie können jederzeit Auskunft über die von uns gespeicherten Daten verlangen.</p>
+            </div>
+            <div class="bg-secondary-50 rounded-xl p-4">
+              <h4 class="font-semibold text-secondary-900 mb-2">Berichtigungsrecht (Art. 16 DSGVO)</h4>
+              <p class="text-sm text-secondary-600">Sie haben das Recht, unrichtige Daten berichtigen zu lassen.</p>
+            </div>
+            <div class="bg-secondary-50 rounded-xl p-4">
+              <h4 class="font-semibold text-secondary-900 mb-2">Löschungsrecht (Art. 17 DSGVO)</h4>
+              <p class="text-sm text-secondary-600">Unter bestimmten Voraussetzungen können Sie die Löschung Ihrer Daten verlangen.</p>
+            </div>
+            <div class="bg-secondary-50 rounded-xl p-4">
+              <h4 class="font-semibold text-secondary-900 mb-2">Einschränkung (Art. 18 DSGVO)</h4>
+              <p class="text-sm text-secondary-600">Sie können die Einschränkung der Verarbeitung verlangen.</p>
+            </div>
+            <div class="bg-secondary-50 rounded-xl p-4">
+              <h4 class="font-semibold text-secondary-900 mb-2">Datenübertragbarkeit (Art. 20 DSGVO)</h4>
+              <p class="text-sm text-secondary-600">Sie haben das Recht, Ihre Daten in einem strukturierten Format zu erhalten.</p>
+            </div>
+            <div class="bg-secondary-50 rounded-xl p-4">
+              <h4 class="font-semibold text-secondary-900 mb-2">Widerspruchsrecht (Art. 21 DSGVO)</h4>
+              <p class="text-sm text-secondary-600">Sie können der Verarbeitung Ihrer Daten widersprechen.</p>
+            </div>
+          </div>
+          
+          <p class="text-secondary-600 mb-4">
+            Zur Ausübung dieser Rechte können Sie sich jederzeit an uns wenden:
+          </p>
+          
+          <div class="bg-primary/5 rounded-xl p-4 not-prose">
+            <p class="text-secondary-700">
+              <strong>E-Mail:</strong>{' '}
+              <a href="mailto:info@robingartenbau.de" class="text-primary hover:underline">info@robingartenbau.de</a>
+            </p>
+            <p class="text-secondary-700">
+              <strong>Post:</strong> Robin Gartenbau, Lauenhäger Straße 53a, 31655 Stadthagen
+            </p>
+          </div>
+        </section>
+
+        <!-- Beschwerderecht -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">8. Beschwerderecht bei Aufsichtsbehörde</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung 
+            Ihrer personenbezogenen Daten durch uns zu beschweren.
+          </p>
+          
+          <p class="text-secondary-600 mb-4">
+            Zuständige Aufsichtsbehörde für unseren Sitz:
+          </p>
+          
+          <div class="bg-secondary-50 rounded-xl p-6 not-prose">
+            <p class="font-semibold text-secondary-900 mb-2">
+              Landesbeauftragte für Datenschutz Niedersachsen
+            </p>
+            <p class="text-secondary-700">
+              Prinzenstraße 5<br />
+              30159 Hannover
+            </p>
+            <p class="text-secondary-700 mt-2">
+              Telefon: 0511 120-4500<br />
+              E-Mail: poststelle@lfd.niedersachsen.de<br />
+              Web: <a href="https://www.lfd.niedersachsen.de" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">www.lfd.niedersachsen.de</a>
+            </p>
+          </div>
+        </section>
+
+        <!-- Datensicherheit -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">9. Datensicherheit</h2>
+          
+          <p class="text-secondary-600 mb-4">
+            Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten 
+            gegen Manipulation, Verlust, Zerstörung oder gegen den Zugriff unberechtigter Personen 
+            zu schützen.
+          </p>
+          
+          <p class="text-secondary-600">
+            Unsere Sicherheitsmaßnahmen werden entsprechend der technologischen Entwicklung 
+            fortlaufend verbessert. Wir verwenden für unsere Website HTTPS-Verschlüsselung, 
+            um die Datenübertragung zu sichern.
+          </p>
+        </section>
+
+        <!-- Aktualisierung -->
+        <section>
+          <h2 class="text-2xl font-bold text-secondary-900 mb-4">10. Aktualisierung der Datenschutzerklärung</h2>
+          
+          <p class="text-secondary-600">
+            Diese Datenschutzerklärung ist aktuell gültig und hat den Stand März 2026. Durch die 
+            Weiterentwicklung unserer Website und Angebote oder aufgrund geänderter gesetzlicher 
+            beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese 
+            Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit 
+            auf dieser Website abgerufen werden.
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Back Link -->
+      <div class="mt-12 pt-8 border-t border-secondary-200">
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-2 text-primary hover:text-primary-700 font-medium transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Zurück zur Startseite
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</Layout>

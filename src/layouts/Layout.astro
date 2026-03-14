@@ -1,0 +1,242 @@
+---
+// ============================================
+// ROBIN GARTENBAU - BASE LAYOUT
+// ============================================
+// Global Layout mit SEO, lokale Fonts & DSGVO-Konformität
+// ============================================
+
+import { ViewTransitions } from 'astro:transitions';
+
+// Lokale Font-Einbindung (DSGVO-konform - keine externen Server-Aufrufe)
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+
+// Props für SEO und Meta-Tags
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalURL?: URL | string;
+  noindex?: boolean;
+  structuredData?: object;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg',
+  canonicalURL = Astro.url,
+  noindex = false,
+  structuredData,
+} = Astro.props;
+
+// Unternehmensdaten
+const company = {
+  name: 'Robin Garten- und Landschaftsbau',
+  shortName: 'Robin Galabau',
+  url: 'https://robingartenbau.de',
+  logo: '/images/logo.png',
+  phone: '+491785361122',
+  email: 'info@robingartenbau.de',
+  address: {
+    street: 'Lauenhäger Straße 53a',
+    city: 'Stadthagen',
+    postalCode: '31655',
+    region: 'Niedersachsen',
+    country: 'DE',
+  },
+};
+
+// Local Business Structured Data (Schema.org)
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: company.name,
+  image: new URL(image, company.url).toString(),
+  url: company.url,
+  telephone: company.phone,
+  email: company.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: company.address.street,
+    addressLocality: company.address.city,
+    postalCode: company.address.postalCode,
+    addressRegion: company.address.region,
+    addressCountry: company.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 52.3239,
+    longitude: 9.2060,
+  },
+  priceRange: '€€',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:00',
+      closes: '18:00',
+    },
+  ],
+  sameAs: [],
+};
+
+// Webseite Structured Data
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: company.name,
+  url: company.url,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${company.url}/search?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+// Merge custom structured data if provided
+const finalStructuredData = structuredData || [localBusinessSchema, websiteSchema];
+---
+
+<!DOCTYPE html>
+<html lang="de-DE" class="scroll-smooth">
+  <head>
+    <!-- Charset & Viewport -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Basis Meta-Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={company.name} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Theme Color für Mobile Browser -->
+    <meta name="theme-color" content="#6fa822" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || company.url)} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={company.name} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site || company.url)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Font Awesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Preconnect (nur intern) -->
+    <link rel="preconnect" href="/" />
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
+
+    <!-- View Transitions (Astro 4.x Feature) -->
+    <ViewTransitions />
+
+    <!-- Inline Critical CSS -->
+    <style is:inline>
+      /* Critical CSS für Above-the-Fold Content */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      html {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      body {
+        min-height: 100vh;
+        background-color: #ffffff;
+        color: #1a1d1d;
+      }
+      
+      /* Reduced Motion Support */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      
+      /* Focus Visible für Accessibility */
+      :focus-visible {
+        outline: 2px solid #6fa822;
+        outline-offset: 2px;
+      }
+      
+      /* Skip Link für Screen Reader */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #6fa822;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-weight: 600;
+        z-index: 100;
+        border-radius: 0 0 4px 0;
+      }
+      
+      .skip-link:focus {
+        top: 0;
+      }
+      
+      /* Service Icon Hover Effect */
+      .group:hover .service-icon {
+        color: #ffffff !important;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased bg-white text-secondary-900">
+    <!-- Skip Link für Accessibility -->
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <!-- Semantische Struktur -->
+    <div class="flex flex-col min-h-screen">
+      <slot name="header" />
+      
+      <main id="main-content" class="flex-1" role="main">
+        <slot />
+      </main>
+      
+      <slot name="footer" />
+    </div>
+
+    <!-- Cookie Banner wird hier injiziert -->
+    <slot name="cookie-banner" />
+
+  </body>
+</html>
