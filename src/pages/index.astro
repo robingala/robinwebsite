@@ -393,23 +393,17 @@ const galleryProjects = [
       <!-- Gallery Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {galleryProjects.map((project, index) => (
-          <figure class="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
+          <div class="rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
             <Image 
               src={project.image}
               alt={project.title}
               width={400}
               height={300}
-              class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
+              class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
               loading="lazy"
               decoding="async"
             />
-            
-            <!-- Overlay -->
-            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-secondary-900/90 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <p class="text-white font-semibold">{project.title}</p>
-              <p class="text-white/80 text-sm">{project.category}</p>
-            </figcaption>
-          </figure>
+          </div>
         ))}
       </div>
 
