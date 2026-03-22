@@ -22,8 +22,9 @@ Diese Datei enthält alle wichtigen Informationen für AI Coding Agents, die an 
 | Framework | [Astro](https://astro.build/) | ^4.15.0 |
 | Styling | [Tailwind CSS](https://tailwindcss.com/) | ^3.4.0 |
 | Schriftarten | @fontsource/inter (lokal) | ^5.0.0 |
+| Icons | Inline SVGs | - |
 | Integration | @astrojs/tailwind | ^5.1.0 |
-| Sitemap | @astrojs/sitemap | ^3.1.0 |
+| Sitemap | Statisch (sitemap.xml) | - |
 | Formular-Service | Web3Forms | - |
 | Hosting | Netlify | - |
 
@@ -34,11 +35,13 @@ Diese Datei enthält alle wichtigen Informationen für AI Coding Agents, die an 
 ```
 ├── public/                      # Statische Assets
 │   ├── favicon.svg              # Favicon
+│   ├── fonts/                   # Lokale Schriftarten
 │   └── images/                  # Bilder
 │       ├── hero.png             # Hero-Bild (Startseite)
 │       ├── logo.png             # Unternehmenslogo
 │       ├── uberuns.png          # Bild für "Über uns" Sektion
 │       ├── ref1.jpeg - ref6.jpeg # Referenzbilder Galerie
+│       ├── gallery/             # Galerie-Bilder (optional)
 │       └── README.md            # Bild-Dokumentation
 ├── src/
 │   ├── components/              # Wiederverwendbare Astro-Komponenten
@@ -92,8 +95,9 @@ npm run astro
 - **Output:** `static` (statische Site Generation)
 - **Site-URL:** https://robingartenbau.de
 - **Bildoptimierung:** Sharp mit 80% Qualität (WebP/AVIF)
-- **HTML-Komprimierung:** Aktiviert
-- **Inline Stylesheets:** Automatisch
+- **HTML-Komprimierung:** Aktiviert (`compressHTML: true`)
+- **Inline Stylesheets:** Automatisch (`inlineStylesheets: 'auto'`)
+- **CSS Code Splitting:** Aktiviert
 
 ---
 
@@ -153,6 +157,12 @@ const pageDescription = 'SEO-Beschreibung';
 - **Responsive:** Mobile-first (z.B. `text-lg lg:text-xl`)
 - **Zustände:** Hover, Focus mit Transitions
 
+### Animationen (definiert in tailwind.config.mjs)
+
+- `animate-fade-in`: 0.5s ease-in-out
+- `animate-slide-up`: 0.6s ease-out
+- `animate-slide-down`: 0.3s ease-out
+
 ### Accessibility (A11y) Standards
 
 - **ARIA-Attribute:** Alle interaktiven Elemente müssen ARIA-Labels haben
@@ -182,24 +192,17 @@ const pageDescription = 'SEO-Beschreibung';
 - **Primär:** Inter (lokal geladen via @fontsource)
 - **Fallback:** system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto
 
-### Animationen
-
-Definiert in `tailwind.config.mjs`:
-- `animate-fade-in`: 0.5s ease-in-out
-- `animate-slide-up`: 0.6s ease-out
-- `animate-slide-down`: 0.3s ease-out
-
 ---
 
 ## DSGVO & Sicherheit
 
 ### Datenschutz-Features
 
-- ✅ **Keine externen Fonts:** Alle Schriften lokal
+- ✅ **Keine externen Fonts:** Alle Schriften lokal (@fontsource/inter)
 - ✅ **Keine Tracking-Cookies:** Nur technisch notwendige Cookies
-- ✅ **Cookie-Banner:** Mit Zustimmungs-Management
+- ✅ **Cookie-Banner:** Mit Zustimmungs-Management (RGPD-konform)
 - ✅ **Keine Analytics:** Kein Google Analytics, kein Facebook Pixel
-- ✅ **Formular:** Web3Forms (DSGVO-konform, EU-Server)
+- ✅ **Formular:** Web3Forms (DSGVO-konform, Formular-Weiterleitung)
 
 ### Sicherheits-Headers (netlify.toml)
 
@@ -208,14 +211,34 @@ X-Frame-Options = "DENY"
 X-Content-Type-Options = "nosniff"
 X-XSS-Protection = "1; mode=block"
 Referrer-Policy = "strict-origin-when-cross-origin"
-Content-Security-Policy = "..."
+Permissions-Policy = "accelerometer=(), camera=(), ..."
+Content-Security-Policy = "default-src 'self'; ..."
 ```
 
 ### Formular-Sicherheit
 
 - **Honeypot-Feld:** Spam-Schutz ohne CAPTCHA
 - **HTTPS:** Alle Formular-Übermittlungen verschlüsselt
-- **Web3Forms:** Access-Key erforderlich (siehe README.md)
+- **Web3Forms:** Access-Key ist direkt im Code (siehe index.astro)
+
+---
+
+## Unternehmensdaten
+
+| Daten | Wert |
+|-------|------|
+| Firmenname | Robin Garten- und Landschaftsbau |
+| Kurzname | Robin Galabau |
+| Inhaber | Kayhan Özer |
+| Adresse | Lauenhäger Straße 53a, 31655 Stadthagen |
+| Telefon | +49 178 5361122 |
+| E-Mail | info@robingartenbau.de |
+| Steuernummer | 44/132/08209 |
+| WhatsApp | https://wa.me/491785361122 |
+
+### Öffnungszeiten (Schema.org in Layout.astro)
+
+- Montag - Freitag: 07:00 - 18:00 Uhr
 
 ---
 
@@ -229,7 +252,28 @@ Content-Security-Policy = "..."
 
 ### Umgebungsvariablen
 
-Keine erforderlich für den Build. Formular-Keys sind direkt im Code (Web3Forms).
+Keine erforderlich für den Build. Alle Konfigurationen sind statisch.
+
+---
+
+## Testing
+
+### Manuelle Tests
+
+- [ ] Lighthouse Score (Performance, A11y, SEO, Best Practices)
+- [ ] Mobile Responsiveness (Chrome DevTools)
+- [ ] Cookie-Banner Funktionalität
+- [ ] Formular-Übermittlung
+- [ ] Navigation (Desktop & Mobile)
+- [ ] Alt-Texte für Bilder
+- [ ] Keyboard-Navigation (Tab-Taste)
+
+### Lighthouse-Ziele
+
+- **Performance:** 100/100
+- **Accessibility:** 100/100
+- **Best Practices:** 100/100
+- **SEO:** 100/100
 
 ---
 
@@ -255,27 +299,6 @@ Keine erforderlich für den Build. Formular-Keys sind direkt im Code (Web3Forms)
 
 ---
 
-## Testing
-
-### Manuelle Tests
-
-- [ ] Lighthouse Score (Performance, A11y, SEO, Best Practices)
-- [ ] Mobile Responsiveness (Chrome DevTools)
-- [ ] Cookie-Banner Funktionalität
-- [ ] Formular-Übermittlung
-- [ ] Navigation (Desktop & Mobile)
-- [ ] Alt-Texte für Bilder
-- [ ] Keyboard-Navigation (Tab-Taste)
-
-### Lighthouse-Ziele
-
-- **Performance:** 100/100
-- **Accessibility:** 100/100
-- **Best Practices:** 100/100
-- **SEO:** 100/100
-
----
-
 ## Häufige Änderungen
 
 ### Neue Seite hinzufügen
@@ -284,6 +307,7 @@ Keine erforderlich für den Build. Formular-Keys sind direkt im Code (Web3Forms)
 2. Layout importieren und verwenden
 3. Header und Footer als Slots einfügen
 4. SEO-Meta-Daten definieren
+5. In `netlify.toml` Redirect hinzufügen (optional)
 
 ### Neue Leistung hinzufügen
 
@@ -316,3 +340,4 @@ Keine erforderlich für den Build. Formular-Keys sind direkt im Code (Web3Forms)
 3. **Accessibility:** ARIA-Labels und semantisches HTML beibehalten
 4. **Performance:** Bilder optimieren, kein unnötiges JavaScript
 5. **SEO:** Meta-Tags, Schema.org, Canonical-URLs beachten
+6. **Keine Annahmen:** Alle Änderungen müssen auf tatsächlichen Datei-Inhalten basieren
